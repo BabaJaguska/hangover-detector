@@ -1,7 +1,13 @@
 # Add src to path
 import sys
-sys.path.append('../src')
+import os
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+src_dir = os.path.abspath(os.path.join(current_dir, "..", "src"))
+sys.path.append(src_dir)
+
 from hangover_lib import hangover_detector
+
 
 def test_hangover_detector():
     detector = hangover_detector()
