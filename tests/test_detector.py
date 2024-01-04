@@ -31,17 +31,19 @@ def test_hangover_person(detector):
     assert description is not None
 
 
-# def test_not_hangover_person():
-#     detector = hangover_detector()
-#     test_url = "https://img.freepik.com/free-photo/handsome-cheerful-man-with-happy-smile_176420-18028.jpg"
-#     class_, probs, description = detector.detect(test_url)
-#     assert probs[0] < 0.5
-#     assert description is not None
+def test_not_hangover_person():
+    detector = hangover_detector()
+    test_url = "https://img.freepik.com/free-photo/handsome-cheerful-man-with-happy-smile_176420-18028.jpg"
+    class_, probs, description = detector.detect(test_url)
+    assert probs[0] < 0.5
+    assert description is not None
+    assert class_ == "A person feeling ok"
 
 
-# def test_not_person():
-#     detector = hangover_detector()
-#     test_url = "https://images.all-free-download.com/images/graphiclarge/nature_backdrop_picture_flying_butterflies_flower_6930710.jpg"
-#     class_, probs, description = detector.detect(test_url)
-#     assert probs[0] < 0.5
-#     assert description is not None
+def test_not_person():
+    detector = hangover_detector()
+    test_url = "https://images.all-free-download.com/images/graphiclarge/nature_backdrop_picture_flying_butterflies_flower_6930710.jpg"
+    class_, probs, description = detector.detect(test_url)
+    assert probs[0] < 0.5
+    assert description is not None
+    assert class_ == "Still-life"
