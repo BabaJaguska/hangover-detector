@@ -35,4 +35,4 @@ def streamlit_main():
 
 if __name__ == "__main__":
     # streamlit_main()
-    main()
+    streamlit_main()
