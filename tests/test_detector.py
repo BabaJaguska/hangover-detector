@@ -16,7 +16,6 @@ import pytest
 def detector():
     det = hangover_detector()
     yield det
-    det.quit()
 
 
 def test_fixture(detector):
