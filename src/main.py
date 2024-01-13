@@ -7,8 +7,9 @@ def main():
 
     detector = hangover_detector()
     test_url = "https://t4.ftcdn.net/jpg/01/58/86/39/360_F_158863947_9kRfTbvp6ZaFOG55GlWAidfZEjZvMG0L.jpg"
+    #test_url = "https://hips.hearstapps.com/hmg-prod/images/close-up-of-tulips-blooming-in-field-royalty-free-image-1584131603.jpg"
     class_, probs, description = detector.detect(test_url)
-    print(f"Probability of hangover: {probs[0]:.2f}")
+    print(f"Probability of hangover: {probs[0][0]:.2f}")
     print(f"Description: {description}")
     print(f"Class: {class_}")
 
@@ -35,4 +36,4 @@ def streamlit_main():
 
 if __name__ == "__main__":
     # streamlit_main()
-    streamlit_main()
+    main()
