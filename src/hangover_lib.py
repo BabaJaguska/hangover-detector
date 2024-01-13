@@ -2,6 +2,7 @@ import torch
 import requests
 from PIL import Image
 import clip
+import io
 
 
 class hangover_detector:
@@ -12,15 +13,16 @@ class hangover_detector:
         self.model, self.preprocess = clip.load("ViT-B/32", device=self.device)
         self.classes = [
             "A person with a hangover",
-            "A person feeling ok",
+            "A well-rested person",
+            "A person engaging in an activity",
+            "A neutral looking person",
             "Still-life",
         ]
         self.tokens = torch.cat(
             [clip.tokenize(f"a photo of a {d}") for d in self.classes]
         ).to(self.device)
 
-    def detect(self, url):
-        img = Image.open(requests.get(url, stream=True).raw)
+    def detect(self, img):
         image_input = self.preprocess(img).unsqueeze(0).to(self.device)
         probs = self.get_probabilities(image_input)
         class_ = self.get_class(probs)
@@ -52,3 +54,19 @@ class hangover_detector:
         if probs[0] >= 0.3:
             return "Off to work you go."
         return "Healthy as a horse. Grab a beer."
+
+
+def get_image_from_url(url):
+    try:
+        img = Image.open(requests.get(url, stream=True).raw)
+    except:
+        print("Error: Could not open image")
+    return img
+
+
+def get_image_from_file(file):
+    try:
+        img = Image.open(io.BytesIO(file))
+    except:
+        print("Error: Could not open image")
+    return img
